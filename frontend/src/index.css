@@ -1,0 +1,12 @@
+@import "tailwindcss";
+/* ===== Loader Spinner ===== */
+.loader {
+  border-radius: 9999px;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
