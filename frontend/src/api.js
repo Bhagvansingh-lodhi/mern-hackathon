@@ -62,6 +62,6 @@ export const profileAPI = {
 
 // AI Features APIs
 export const aiAPI = {
-  getCareerRecommendation: () => apiRequest('/ai', 'GET'),
+  getCareerRecommendation: () => apiRequest('/ai/career', 'GET'),
   generateRoadmap: (career) => apiRequest('/roadmap', 'POST', { career }),
 };
