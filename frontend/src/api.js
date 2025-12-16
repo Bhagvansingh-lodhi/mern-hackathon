@@ -9,42 +9,42 @@ const getAuthToken = () => {
 export const apiRequest = async (endpoint, method = 'GET', body = null) => {
   const url = `${API_BASE_URL}${endpoint}`;
   const token = getAuthToken();
-  
+
   const headers = {
     'Content-Type': 'application/json',
   };
-  
+
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
-  
+
   const options = {
     method,
     headers,
-  credentials: "include" // ✅ IMPORTANT FOR CORS
-
+    credentials: 'include'
   };
-  
+
   if (body) {
     options.body = JSON.stringify(body);
   }
-  
+
   try {
     const response = await fetch(url, options);
-    
+
     if (!response.ok) {
       if (response.status === 401) {
-        // Token expired or invalid
+        // ❌ NO redirect here
         localStorage.removeItem('token');
-        window.location.href = '/login';
+        throw new Error('Unauthorized');
       }
+
       const error = await response.json();
       throw new Error(error.message || 'Something went wrong');
     }
-    
+
     return await response.json();
   } catch (error) {
-    console.error('API Error:', error);
+    console.error('API Error:', error.message);
     throw error;
   }
 };
@@ -62,7 +62,6 @@ export const profileAPI = {
 
 // AI Features APIs
 export const aiAPI = {
-  getCareerRecommendation: () => apiRequest('/ai/career', 'GET'),
+  getCareerRecommendation: () => apiRequest('/ai', 'GET'),
   generateRoadmap: (career) => apiRequest('/roadmap', 'POST', { career }),
-  analyzeResume: (text) => apiRequest('/resume', 'POST', { text }),
 };
