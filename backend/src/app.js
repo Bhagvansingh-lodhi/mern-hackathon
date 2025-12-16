@@ -7,7 +7,7 @@ const app = express();
 app.use(cors({
   origin: [
     "http://localhost:5173",
-    "https://mern-hackathon-p466.onrender.com"
+    "https://aicareercoach-eight.vercel.app"
   ],
   credentials: true
 }));
