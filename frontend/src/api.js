@@ -21,6 +21,8 @@ export const apiRequest = async (endpoint, method = 'GET', body = null) => {
   const options = {
     method,
     headers,
+  credentials: "include" // ✅ IMPORTANT FOR CORS
+
   };
   
   if (body) {
