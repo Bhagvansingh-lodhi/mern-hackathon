@@ -63,6 +63,8 @@ JSON FORMAT:
 
   } catch (error) {
     console.error("Roadmap Error:", error);
-    res.status(500).json({ message: "Failed to generate roadmap" });
+    res
+      .status(error.statusCode || 500)
+      .json({ message: error.message || "Failed to generate roadmap" });
   }
 };

@@ -63,6 +63,8 @@ JSON FORMAT:
 
   } catch (error) {
     console.error("AI Career Error:", error);
-    res.status(500).json({ message: "AI career recommendation failed" });
+    res
+      .status(error.statusCode || 500)
+      .json({ message: error.message || "AI career recommendation failed" });
   }
 };

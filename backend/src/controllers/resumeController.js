@@ -52,6 +52,8 @@ JSON FORMAT:
 
   } catch (error) {
     console.error("Resume AI Error:", error);
-    res.status(500).json({ message: "Resume analysis failed" });
+    res
+      .status(error.statusCode || 500)
+      .json({ message: error.message || "Resume analysis failed" });
   }
 };

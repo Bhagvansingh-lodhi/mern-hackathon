@@ -6,40 +6,42 @@ export default function Navbar() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    navigate('/login');
+    window.dispatchEvent(new Event('authchange'));
+    navigate('/login', { replace: true });
   };
 
   if (!token) return null;
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-      <div className="max-w-7xl mx-auto px-4">
+    <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/85 backdrop-blur-md">
+      <div className="mx-auto max-w-7xl px-4">
         <div className="flex h-16 items-center justify-between">
-          
-          {/* Logo / Brand */}
-          <div className="flex items-center">
-            <span className="text-xl font-semibold tracking-wide text-blue-600">
-              AI Career Coach
-            </span>
+          <div className="flex items-center gap-3">
+            <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-blue-600 text-sm font-bold text-white shadow-sm">
+              AI
+            </div>
+            <div>
+              <span className="block text-base font-semibold tracking-wide text-slate-900">
+                Career Coach
+              </span>
+              <span className="block text-xs text-slate-500">
+                Plan your next move with confidence
+              </span>
+            </div>
           </div>
 
-          {/* Right Section */}
           <div className="flex items-center gap-4">
-            <span className="hidden sm:block text-sm text-gray-600">
-              Welcome back 👋
+            <span className="hidden text-sm text-slate-600 sm:block">
+              Welcome back
             </span>
 
             <button
               onClick={handleLogout}
-              className="rounded-lg bg-red-500 px-4 py-2 text-sm font-medium text-white 
-                         transition-all duration-200 
-                         hover:bg-red-600 hover:shadow-md 
-                         active:scale-95"
+              className="rounded-xl bg-slate-900 px-4 py-2 text-sm font-medium text-white transition-all duration-200 hover:-translate-y-0.5 hover:bg-slate-700 hover:shadow-md active:scale-95"
             >
               Logout
             </button>
           </div>
-
         </div>
       </div>
     </nav>

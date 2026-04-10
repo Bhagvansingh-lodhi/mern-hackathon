@@ -1,7 +1,9 @@
 const r = require('express').Router();
 const auth = require('../middleware/authMiddleware');
-const { updateProfile } = require('../controllers/profileContollers');
+const { getProfile, updateProfile } = require('../controllers/profileContollers');
 
+// GET /api/profile
+r.get('/', auth, getProfile);
 // PUT /api/profile
 r.put('/', auth, updateProfile);
 
